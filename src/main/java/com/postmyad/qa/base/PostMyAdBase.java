@@ -1,9 +1,6 @@
 package com.postmyad.qa.base;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -48,6 +45,7 @@ public class PostMyAdBase {
 
 
 
+
     }
 
     public WebElement getElementSmartly (By locator){
@@ -56,6 +54,20 @@ public class PostMyAdBase {
     }
 
 
+
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+
+
+
+    public void scroll(){
+
+        js.executeScript("window.scrollBy(0,1000)");
+}
+
+public void clickSafelyJS(WebElement locator){
+    js.executeScript("arguments[0].click();", locator);
+
+    }
 
 
         public WebElement getElementSmartly (WebDriver driver,int timeout,WebElement locator, String message){

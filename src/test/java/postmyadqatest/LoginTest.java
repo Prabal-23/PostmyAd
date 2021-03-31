@@ -10,18 +10,22 @@ public class LoginTest extends PostMyAdBase {
     public void login (){
 
         LoginTest login = new LoginTest();
+
         login.start();
         login.initialization();
         LoginPO l1 = new LoginPO();
         l1.validTopLinks();
+
         l1.verifyQuickLinksOverlay();
        // l1.findPuneProject();
         l1.Login();
+
         l1.clickAllCloseIconAfterLogin();
         l1.clickPostMyAd();
+        l1.createAd();
     //    l1.closeMaxListingPop();
 
-        driver.quit();
+      //  driver.quit();
 
 
 

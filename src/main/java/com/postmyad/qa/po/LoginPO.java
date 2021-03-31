@@ -4,6 +4,7 @@ import com.postmyad.qa.base.PostMyAdBase;
 import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -58,20 +59,66 @@ public class LoginPO extends PostMyAdBase {
 
     @FindBy(xpath="//*[text()='Do not show again']") WebElement donotshow;
 
+    @FindBy(xpath = "//div[@id='R']") WebElement renttab;
+
+    @FindBy(xpath = "//span[text()='Apartment']") WebElement residentialradio;
+
+    @FindBy(xpath = "//span[text()='Continue']") WebElement continue2;
+
+    @FindBy(xpath = "//input[@id='city']")  WebElement citytextbox;
+
+    @FindBy(xpath = "//*[@id='citySuggestor']/div[7]")WebElement kotavalue;
+
+    @FindBy(xpath = "//div/input[@id='project']")WebElement apartmenttextbox;
+
+    @FindBy(xpath = "//div[@id='projectSuggestor']/div[3]")WebElement apartmentvalue;
+
+    @FindBy(xpath = "//input[@id='address-input']")WebElement housenumbertextbox;
+
+    @FindBy(xpath = "//*[contains(text(),'Continue')]")WebElement continuebutton3;
+
+    @FindBy(xpath = "//div[@id='carpet-input']//input")WebElement carpetareatextbox;
+
+    @FindBy(xpath = "//div[@id='bedroomNum']/div[2]")WebElement numberofbedroom;
+
+    @FindBy(xpath = "//*[@id='bathroomNum-input']//div[2]")WebElement numberofbathroom;
+
+    @FindBy(xpath = "//div[@id='balconyNum']/div[3]")WebElement numberofbalconies;
+
+    @FindBy(xpath = "//span[contains(text(),'Semi-furnished')]")WebElement semifurnishedtab;
+    @FindBy(xpath = "(//div[@id='furnishing_Ward-input']//i)[2]")WebElement wardrobeicon;
+    @FindBy(xpath = "//div[@class='furnishingCustom_inline_list_wrap__3h2HE']/div[@id='furnishing_Wtrpurfr-input']")WebElement waterpurifiercheckbox;
+  //  @FindBy(xpath = "//label[@for='furnishing_Wtrpurfr']")WebElement n;
+    @FindBy(xpath = "//label[@for='furnishing_Kit']")WebElement modularkitchen;
+    @FindBy(xpath = "(//div[@id='coveredParking-input']//i)[2]")WebElement coveredparking;
+    @FindBy(xpath = "//div[@id='totalFloor-input']//input") WebElement totalfloor;
+    @FindBy(xpath = "//div[@id='floorNum-input']//span[text()='7']") WebElement flatfloornumber;
+    @FindBy(xpath = "//div[@id='age-input']//span[contains(text(),'1-5 years')]") WebElement propertyage;
+    @FindBy(xpath = "//div[@id='availabilityDate-input']") WebElement datepicker;
+    @FindBy(xpath = "//span[@class='flatpickr-day today']") WebElement today;
+    @FindBy(xpath = "//div[@id='availableFor-input']//i") WebElement availablefor;
+
+
+
+
     By e = By.xpath("//*[@id=\"SidePaneComponent\"]/div[2]/a");
 
 
 
-    public LoginPO(){
-        PageFactory.initElements(driver,this);
+    public LoginPO() {
+        PageFactory.initElements(driver, this);
+
 
     }
 
 
 
+
+
+
     public void thodaWait()
     {
-        driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
     }
 public void Login (){
         clickOnElement(driver,10,navigationbar,"Element not visible");
@@ -83,11 +130,11 @@ public void Login (){
     System.out.println("Login Successful");
 
 
+
 }
 
 
-
-public  void validTopLinks(){
+    public  void validTopLinks(){
 
         Assert.assertEquals(postpropertyforfreebutton.getText(),"Post Property for Free","Link not present");
         Assert.assertEquals(customerservicelink.getText(),"CUSTOMER SERVICE","Link not present");
@@ -110,6 +157,8 @@ public  void validTopLinks(){
 
 
     }
+
+
 
 
 
@@ -157,6 +206,39 @@ public void clickPostMyAd(){
           clickOnElement(driver,20,gotit,"button not present");
 
       }
+    }
+
+    public void createAd(){
+
+        clickOnElement(driver,20,renttab,"");
+        clickOnElement(driver,20,residentialradio,"");
+        clickOnElement(driver,20,continue2,"");
+       sendKeysInTextBox(driver,20,citytextbox,"kot");
+       clickOnElement(driver,20,kotavalue,"");
+        sendKeysInTextBox(driver,20,apartmenttextbox,"Mahala");
+        clickOnElement(driver,20,apartmentvalue,"");
+        sendKeysInTextBox(driver,20,housenumbertextbox,"E6-703");
+        clickOnElement(driver,20,continuebutton3,"");
+        clickOnElement(driver,20,numberofbedroom,"");
+        clickOnElement(driver,20,numberofbathroom,"");
+        sendKeysInTextBox(driver,20,carpetareatextbox,"1080");
+        clickOnElement(driver,20,semifurnishedtab,"");
+        clickOnElement(driver,20,wardrobeicon,"");
+        scroll();
+        thodaWait();
+       // clickSafelyJS(waterpurifiercheckbox);
+
+      //  clickOnElement(driver,20,waterpurifiercheckbox,"");
+       // clickOnElement(driver,20,modularkitchen,"");
+        clickOnElement(driver,20,coveredparking,"");
+        sendKeysInTextBox(driver,20,totalfloor,"7");
+        clickOnElement(driver,20,flatfloornumber,"");
+        clickOnElement(driver,20,propertyage,"");
+        clickOnElement(driver,20,datepicker,"");
+        clickOnElement(driver,20,today,"");
+        clickOnElement(driver,20,availablefor,"");
+
+
     }
 
 
