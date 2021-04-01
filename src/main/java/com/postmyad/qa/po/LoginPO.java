@@ -97,6 +97,11 @@ public class LoginPO extends PostMyAdBase {
     @FindBy(xpath = "//div[@id='availabilityDate-input']") WebElement datepicker;
     @FindBy(xpath = "//span[@class='flatpickr-day today']") WebElement today;
     @FindBy(xpath = "//div[@id='availableFor-input']//i") WebElement availablefor;
+    @FindBy(xpath = "//span[contains(text(),'Continue')]")WebElement continue4;
+    @FindBy(xpath = "//*[@id='photo-upload']")WebElement upload;
+    @FindBy(xpath = "//*[contains(text(),'Review & Edit')]") WebElement reviewandeditbutton;
+    @FindBy(xpath = "//span[contains(text(),'Click to add more pics')]") WebElement addmoreimages;
+
 
 
 
@@ -208,7 +213,7 @@ public void clickPostMyAd(){
       }
     }
 
-    public void createAd(){
+    public void createAd() throws InterruptedException {
 
         clickOnElement(driver,20,renttab,"");
         clickOnElement(driver,20,residentialradio,"");
@@ -221,26 +226,40 @@ public void clickPostMyAd(){
         clickOnElement(driver,20,continuebutton3,"");
         clickOnElement(driver,20,numberofbedroom,"");
         clickOnElement(driver,20,numberofbathroom,"");
+        clickOnElement(driver,20,numberofbalconies,"");
+
         sendKeysInTextBox(driver,20,carpetareatextbox,"1080");
         clickOnElement(driver,20,semifurnishedtab,"");
         clickOnElement(driver,20,wardrobeicon,"");
         scroll();
-        thodaWait();
-       // clickSafelyJS(waterpurifiercheckbox);
+       Thread.sleep(1000);
+      // clickSafelyJS(waterpurifiercheckbox);
 
-      //  clickOnElement(driver,20,waterpurifiercheckbox,"");
-       // clickOnElement(driver,20,modularkitchen,"");
+      clickOnElement(driver,220,waterpurifiercheckbox,"");
+        clickOnElement(driver,20,modularkitchen,"");
         clickOnElement(driver,20,coveredparking,"");
         sendKeysInTextBox(driver,20,totalfloor,"7");
-        clickOnElement(driver,20,flatfloornumber,"");
-        clickOnElement(driver,20,propertyage,"");
-        clickOnElement(driver,20,datepicker,"");
-        clickOnElement(driver,20,today,"");
-        clickOnElement(driver,20,availablefor,"");
+        clickSafelyJS(flatfloornumber);
+       // clickOnElement(driver,120,flatfloornumber,"");
+        clickOnElement(driver,120,propertyage,"");
+        clickOnElement(driver,220,datepicker,"");
+        clickOnElement(driver,220,today,"");
+        clickOnElement(driver,220,availablefor,"");
+        clickOnElement(driver,20,continue4,"");
+
 
 
     }
+public void uploadImage() {
 
+    driver.findElement(By.xpath("//input[@type='file']")).sendKeys("C:\\Users\\Lucky\\Desktop\\Home\\lucky1.jpg");
+    clickOnElement(driver,20,reviewandeditbutton,"");
+    for (int i = 2; i < 8; i++) {
+        driver.findElement(By.xpath("//input[@type='file']")).sendKeys("C:\\Users\\Lucky\\Desktop\\Home\\lucky"+i+".jpg");
+
+
+    }
+}
 
 
     }
