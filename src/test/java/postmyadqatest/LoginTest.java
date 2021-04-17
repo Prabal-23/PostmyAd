@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class LoginTest extends PostMyAdBase {
 
     @Test
-    public void login (){
+    public void login () throws InterruptedException {
 
         LoginTest login = new LoginTest();
 
@@ -23,6 +23,7 @@ public class LoginTest extends PostMyAdBase {
         l1.clickAllCloseIconAfterLogin();
         l1.clickPostMyAd();
         l1.createAd();
+        l1.uploadImage();
     //    l1.closeMaxListingPop();
 
       //  driver.quit();

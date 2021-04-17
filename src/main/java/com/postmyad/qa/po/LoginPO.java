@@ -71,7 +71,7 @@ public class LoginPO extends PostMyAdBase {
 
     @FindBy(xpath = "//div/input[@id='project']")WebElement apartmenttextbox;
 
-    @FindBy(xpath = "//div[@id='projectSuggestor']/div[3]")WebElement apartmentvalue;
+    @FindBy(xpath = "//div[@id='projectSuggestor']/div[2]")WebElement apartmentvalue;
 
     @FindBy(xpath = "//input[@id='address-input']")WebElement housenumbertextbox;
 
@@ -253,9 +253,13 @@ public void clickPostMyAd(){
 public void uploadImage() {
 
     driver.findElement(By.xpath("//input[@type='file']")).sendKeys("C:\\Users\\Lucky\\Desktop\\Home\\lucky1.jpg");
+    int count=1;
     clickOnElement(driver,20,reviewandeditbutton,"");
-    for (int i = 2; i < 8; i++) {
+    for (int i = 2; i < 5; i++) {
         driver.findElement(By.xpath("//input[@type='file']")).sendKeys("C:\\Users\\Lucky\\Desktop\\Home\\lucky"+i+".jpg");
+        System.out.println(count);
+        count++;
+
 
 
     }
