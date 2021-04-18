@@ -1,21 +1,14 @@
 package com.postmyad.qa.po;
 
+import com.excel.utility.XLS_Reader;
 import com.postmyad.qa.base.PostMyAdBase;
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.asserts.Assertion;
 
 import java.util.List;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 public class LoginPO extends PostMyAdBase {
@@ -67,11 +60,11 @@ public class LoginPO extends PostMyAdBase {
 
     @FindBy(xpath = "//input[@id='city']")  WebElement citytextbox;
 
-    @FindBy(xpath = "//*[@id='citySuggestor']/div[7]")WebElement kotavalue;
+    @FindBy(xpath = "//*[@id='citySuggestor']//span[2]")WebElement cityvalue;
 
     @FindBy(xpath = "//div/input[@id='project']")WebElement apartmenttextbox;
 
-    @FindBy(xpath = "//div[@id='projectSuggestor']/div[2]")WebElement apartmentvalue;
+    @FindBy(xpath = "//div[@id='projectSuggestor']//span[2]")WebElement apartmentvalue;
 
     @FindBy(xpath = "//input[@id='address-input']")WebElement housenumbertextbox;
 
@@ -107,6 +100,7 @@ public class LoginPO extends PostMyAdBase {
 
 
     By e = By.xpath("//*[@id=\"SidePaneComponent\"]/div[2]/a");
+    XLS_Reader reader = new XLS_Reader();
 
 
 
@@ -125,18 +119,15 @@ public class LoginPO extends PostMyAdBase {
     {
         driver.manage().timeouts().implicitlyWait(40,TimeUnit.SECONDS);
     }
-public void Login (){
-        clickOnElement(driver,10,navigationbar,"Element not visible");
-        clickOnElement(driver,10,loginlink,"");
-        sendKeysInTextBox(driver,20,usernametextbox,prop.getProperty("username"));
-        clickOnElement(driver,20,continuebutton,"Button not visible");
-    sendKeysInTextBox(driver,20,password,prop.getProperty("password"));
-    clickOnElement(driver,20,loginbutton,"Button ot visible");
-    System.out.println("Login Successful");
-
-
-
-}
+    public void Login (String username,String pass) {
+        clickOnElement(driver, 10, navigationbar, "Element not visible");
+        clickOnElement(driver, 10, loginlink, "");
+        sendKeysInTextBox(driver, 20, usernametextbox, username);
+        clickOnElement(driver, 20, continuebutton, "Button not visible");
+        sendKeysInTextBox(driver, 20, password, pass);
+        clickOnElement(driver, 20, loginbutton, "Button not visible");
+        System.out.println("Login Successful");
+    }
 
 
     public  void validTopLinks(){
@@ -213,17 +204,24 @@ public void clickPostMyAd(){
       }
     }
 
-    public void createAd() throws InterruptedException {
-
+    public void enterBasicDetailsForRentApartment(){
         clickOnElement(driver,20,renttab,"");
         clickOnElement(driver,20,residentialradio,"");
         clickOnElement(driver,20,continue2,"");
-       sendKeysInTextBox(driver,20,citytextbox,"kot");
-       clickOnElement(driver,20,kotavalue,"");
-        sendKeysInTextBox(driver,20,apartmenttextbox,"Mahala");
+
+    }
+
+    public void enterLocationDetails(String cityname,String societyname,String housenumber){
+        sendKeysInTextBox(driver,20,citytextbox,cityname);
+        clickOnElement(driver,20,cityvalue,"");
+        sendKeysInTextBox(driver,20,apartmenttextbox,societyname);
         clickOnElement(driver,20,apartmentvalue,"");
-        sendKeysInTextBox(driver,20,housenumbertextbox,"E6-703");
+        sendKeysInTextBox(driver,20,housenumbertextbox,housenumber);
         clickOnElement(driver,20,continuebutton3,"");
+
+    }
+    public void enterpropertyProfile() throws InterruptedException {
+
         clickOnElement(driver,20,numberofbedroom,"");
         clickOnElement(driver,20,numberofbathroom,"");
         clickOnElement(driver,20,numberofbalconies,"");
