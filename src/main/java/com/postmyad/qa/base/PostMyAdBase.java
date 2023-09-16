@@ -3,6 +3,7 @@ package com.postmyad.qa.base;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.Color;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -10,6 +11,7 @@ import org.testng.Assert;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -71,14 +73,14 @@ public void clickSafelyJS(WebElement locator){
 
 
         public WebElement getElementSmartly (WebDriver driver,int timeout,WebElement locator, String message){
-            return new WebDriverWait(driver,timeout).until(ExpectedConditions.visibilityOf(locator));
+            return new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(locator));
 
 
     }
 
     public void clickOnElement(WebDriver driver,int timeout,WebElement locator, String message){
 
-        WebDriverWait wait= new WebDriverWait(driver,timeout);
+        WebDriverWait wait= new WebDriverWait(driver,Duration.ofSeconds(10));
                 wait.ignoring(StaleElementReferenceException.class)
                     .until(ExpectedConditions.elementToBeClickable(locator))
                     .click();
@@ -87,7 +89,7 @@ public void clickSafelyJS(WebElement locator){
 
     public void sendKeysInTextBox(WebDriver driver,int timeout,WebElement locator, String value){
 
-        WebDriverWait wait= new WebDriverWait(driver,timeout);
+        WebDriverWait wait= new WebDriverWait(driver,Duration.ofSeconds(10));
         wait.ignoring(StaleElementReferenceException.class)
                 .until(ExpectedConditions.elementToBeClickable(locator))
                 .sendKeys(value);
@@ -95,7 +97,7 @@ public void clickSafelyJS(WebElement locator){
 
     public  String getCSSValueofElement(WebDriver driver,int timeout, WebElement locator,String attribute){
 
-         String actualvalue= new WebDriverWait(driver,timeout).until(ExpectedConditions.visibilityOf(locator)).getCssValue(attribute);
+         String actualvalue= new WebDriverWait(driver,Duration.ofSeconds(10)).until(ExpectedConditions.visibilityOf(locator)).getCssValue(attribute);
          String actualcolorhex = Color.fromString(actualvalue).asHex();
 
          return actualcolorhex;
